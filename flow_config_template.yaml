@@ -1,0 +1,20 @@
+flow_order:
+  - Data
+  - Clustering
+  - Filtering
+  - Weighting
+
+data:
+  method: "PandasTask"
+  data_source: "data.csv"
+
+clustering:
+  method: "ClusteringTask"
+  num_neighbors: 5
+
+filtering:
+  method: "ThresholdTak"
+  threshold_value: 0.5
+
+weighting:
+  method: "TFIDFTask"
