@@ -64,14 +64,13 @@ class DocumentVectorizer:
     def map_documents_to_tokens(self, documents) -> pd.Series:
         docs = []
         for document in documents:
-            if isinstance(document) == csr_matrix:
-                doc = document.toarray()
+            if isinstance(document, csr_matrix):
+                _, cols = document.nonzero()
             else:
-                doc = document.copy()
+                _, cols = document.nonzero()
             tokens = []
-            for term_id in range(0, len(doc)):
-                if doc[term_id]:
-                    tokens.append(self.map_id_to_token(term_id))
+            for term_id in cols:
+                tokens.append(self.map_id_to_token(term_id))
 
             docs.append(tokens)
 
