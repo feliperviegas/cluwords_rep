@@ -6,6 +6,7 @@ from embedding_task.embedding_task import EmbeddingTask
 from embedding_task.gensim_emb_task import GensimEmbeddingTask
 from filtering_task.threshold_task import ThresholdTask
 from weighting_task.tf_task import TfTask
+from writer.writer_task import WriterTask
 
 
 TASKS_MAPPING = {
@@ -16,5 +17,6 @@ TASKS_MAPPING = {
     "ClusteringTask": ClusteringTask,
     "HnswTask": HnswTask,
     "ThresholdTask": ThresholdTask,
-    "TfTask": TfTask
+    "TfTask": TfTask,
+    "WriterTask": WriterTask,
 }
