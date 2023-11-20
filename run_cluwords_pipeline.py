@@ -36,6 +36,8 @@ class FlowProcessor:
             return TASKS_MAPPING[config['method']](threshold_value=config['threshold_value'])
         elif step == 'Weighting':
             return TASKS_MAPPING[config['method']]()
+        elif step == 'Writer':
+            return TASKS_MAPPING[config['method']](cluwords_repr_path=config["cluwords_repr_path"], data_path=config["data_path"])
 
     def process_flow(self):
         for step in self.flow_order:
@@ -57,6 +59,9 @@ class FlowProcessor:
                 self.cluwords_bow_repr, self.data = task.execute(data=self.data, 
                                                                  vocabulary=self.vocabulary, 
                                                                  semantic_matrix=self.semantic_matrix)
+            elif task.__class__.__name__ == 'WriterTask':
+                task.execute(cluwords_repr=self.cluwords_bow_repr, 
+                             data_df=self.data)
             else:
                 print("ops")    
             
