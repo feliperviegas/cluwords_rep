@@ -35,34 +35,4 @@ class HnswTask(ClusteringTask):
         self.labels, self.distances = p.knn_query(word_vectors, k=self.num_neighbors)
         
         return self.labels, self.distances
-    
-        # FILTERING STUFF
-        
-         # if self.threshold is None:
-        #     cosine_vec = (1. - self.distances).flatten()
-        #     self.threshold = np.round(np.percentile(cosine_vec, 95), 2)
 
-        # self.similarity_matrix = IncrementalCOOMatrix(shape=(self.n_words, self.n_words), dtype=np.float32)
-        # knn_list_of_dicts = []
-        # for word_ref_index in range(0, self.n_words):
-        #     words = []
-        #     for index, k in enumerate(self.labels[word_ref_index]):
-        #         if 1 - self.distances[word_ref_index][index] >= self.threshold:
-        #             words.append(self.vocabulary[k])
-        #             similarity_matrix.append(word_ref_index, k, round(1. - self.distances[word_ref_index][index], 2))
-
-        #     knn_list_of_dicts.append(
-        #         {
-        #             "word_ref": self.vocabulary[word_ref_index],
-        #             "word_neigh": words,
-        #         }
-        #     )
-
-        # self.knn_words_df = pd.DataFrame(knn_list_of_dicts)
-
-        # # Diagonal must be 1.0
-        # similarity_matrix = similarity_matrix.tocsr()
-        # for idx in range(similarity_matrix.shape[0]):
-        #     similarity_matrix[idx, idx] = 1.0
-            
-        # return similarity_matrix
