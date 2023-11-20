@@ -27,12 +27,12 @@ clustering:
 
 filtering:
   method: "ThresholdTask"
-  threshold_value: 0.8
+  threshold_value: 0.7
 
 weighting:
   method: "TfTask"
 
 writer:
   method: "WriterTask"
-  cluwords_repr_path: "data_output\\cw_thresh_0.8.npz"
-  data_path: "data_output\\queries_thresh_0.8.csv"
+  cluwords_repr_path: "data_output\\cw_thresh_0.7.npz"
+  data_path: "data_output\\queries_thresh_0.7.parquet"
