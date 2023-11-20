@@ -5,6 +5,7 @@ flow_order:
   - Clustering
   - Filtering
   - Weighting
+  - Writer
 
 input:
   data_source: "data\\queries_samples.csv"
@@ -30,3 +31,8 @@ filtering:
 
 weighting:
   method: "TfTask"
+
+writer:
+  method: "WriterTask"
+  cluwords_repr_path: "data_output\\cw_thresh_0.8.npz"
+  data_path: "data_output\\queries_thresh_0.8.csv"
