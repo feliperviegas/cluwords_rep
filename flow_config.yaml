@@ -4,11 +4,13 @@ flow_order:
   - Embedding
   - Clustering
   - Filtering
+  - POSFiltering
   - Weighting
   - Writer
 
 input:
-  data_source: "data\\queries_samples.csv"
+  # data_source: "data\\corpus_top10.csv"
+  data_source: "data\\queries_samples.csv"  
 #  data_source: "data\\corpus_top50.csv"
 
 data:
@@ -27,12 +29,27 @@ clustering:
 
 filtering:
   method: "ThresholdTask"
-  threshold_value: 0.7
+  threshold_value: 1.
 
+posfiltering:
+  method: "PartOfSpeechTask"
+  pos_filters:
+    - "ADP"
+    - "VERB"
+    - "SYM"
+    - "NUM"
+    - "X"
+    - "SCONJ"
+    - "PUNCT"
+    - "AUX"
+    - "CONJ"
+  
 weighting:
   method: "TfTask"
 
 writer:
   method: "WriterTask"
-  cluwords_repr_path: "data_output\\cw_thresh_0.7.npz"
-  data_path: "data_output\\queries_thresh_0.7.parquet"
+  # cluwords_repr_path: "data_output\\cw_corpus_thresh_1.0_pos.npz"
+  # data_path: "data_output\\corpus_thresh_1.0_pos.parquet"
+  cluwords_repr_path: "data_output\\cw_thresh_1.0_pos.npz"
+  data_path: "data_output\\queries_thresh_1.0_pos.parquet"

@@ -34,6 +34,8 @@ class FlowProcessor:
             return  TASKS_MAPPING[config['method']](n_threads=config['num_threads'], num_neighbors=config['num_neighbors'])
         elif step == 'Filtering':
             return TASKS_MAPPING[config['method']](threshold_value=config['threshold_value'])
+        elif step == 'POSFiltering':
+            return TASKS_MAPPING[config['method']](pos_filters=config['pos_filters'])
         elif step == 'Weighting':
             return TASKS_MAPPING[config['method']]()
         elif step == 'Writer':
@@ -53,8 +55,10 @@ class FlowProcessor:
                 self.word_vector_space, self.vocabulary = task.execute()
             elif task.get_parent_class_name() == 'ClusteringTask':
                 self.knn_labels, self.knn_distances = task.execute(word_vectors=self.word_vector_space, vocabulary=self.vocabulary)
-            elif task.get_parent_class_name() == 'FilteringTask':
+            elif task.__class__.__name__ == 'ThresholdTask':
                 self.semantic_matrix = task.execute(knn_labels=self.knn_labels, knn_distances=self.knn_distances, vocabulary=self.vocabulary)
+            elif task.__class__.__name__ == 'PartOfSpeechTask':
+                self.semantic_matrix = task.execute(semantic_matrix=self.semantic_matrix, vocabulary=self.vocabulary)
             elif task.get_parent_class_name() == 'WeightingTask':
                 self.cluwords_bow_repr, self.data = task.execute(data=self.data, 
                                                                  vocabulary=self.vocabulary, 

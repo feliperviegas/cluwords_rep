@@ -1,6 +1,5 @@
 import pandas as pd
 import spacy
-from spacymoji import Emoji
 from task.task import Task
 
 
