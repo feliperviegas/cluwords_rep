@@ -36,4 +36,6 @@ class TfTask(WeightingTask):
         cluwords_bow_repr = self.combine_bow_and_semantic_matrices(tf_repr, semantic_matrix)
         cluwords_textual_repr = self.document_vectorizer.map_documents_to_tokens(cluwords_bow_repr)
         data["cluwords_textual_repr"] = cluwords_textual_repr
+        data["cluwords_repr"] = [cw_doc.toarray().flatten() for cw_doc in cluwords_bow_repr]
+        
         return cluwords_bow_repr, data
