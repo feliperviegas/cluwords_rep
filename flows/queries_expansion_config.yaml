@@ -1,0 +1,52 @@
+flow_order:
+  - Input
+  - Data
+  - Embedding
+  - Clustering
+  - Filtering
+  - POSFiltering
+  - Weighting
+  - Writer
+
+input:
+  data_source: "data\\queries_samples.csv"  
+
+data:
+  method: "PandasTask"
+
+embedding:
+  method: "GensimEmbeddingTask"
+  data_source: "data\\wiki-news-300d-1M.vec"
+  binary: False
+  vocabulary: "data\\vocabulary_corpus_top50.csv"
+
+clustering:
+  method: "HnswTask"
+  num_neighbors: 5
+  num_threads: 4
+
+filtering:
+  method: "ThresholdTask"
+  threshold_value: .6
+
+posfiltering:
+  method: "PartOfSpeechTask"
+  pos_filters:
+    - "ADP"
+    - "VERB"
+    - "SYM"
+    - "NUM"
+    - "X"
+    - "SCONJ"
+    - "PUNCT"
+    - "AUX"
+    - "CONJ"
+  
+weighting:
+  method: "TfExpansionTask"
+
+writer:
+  method: "WriterTask"
+  cluwords_repr_path: "data_output\\cw_thresh_0.6_pos.npz"
+  data_path: "data_output\\queries_thresh_0.6_pos_expanded.parquet"
+  
