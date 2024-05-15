@@ -29,17 +29,17 @@ class FlowProcessor:
         if step == 'Data':
             return TASKS_MAPPING[config['method']]()
         elif step == 'Embedding':
-            return TASKS_MAPPING[config['method']](emb_file_source=config['data_source'], binary=config['binary'], vocabulary_file_source=config['vocabulary'])
+            return TASKS_MAPPING[config['method']](**config)
         elif step == 'Clustering':
-            return  TASKS_MAPPING[config['method']](n_threads=config['num_threads'], num_neighbors=config['num_neighbors'])
+            return  TASKS_MAPPING[config['method']](**config)
         elif step == 'Filtering':
-            return TASKS_MAPPING[config['method']](threshold_value=config['threshold_value'])
+            return TASKS_MAPPING[config['method']](**config)
         elif step == 'POSFiltering':
-            return TASKS_MAPPING[config['method']](pos_filters=config['pos_filters'])
+            return TASKS_MAPPING[config['method']](**config)
         elif step == 'Weighting':
             return TASKS_MAPPING[config['method']]()
         elif step == 'Writer':
-            return TASKS_MAPPING[config['method']](cluwords_repr_path=config["cluwords_repr_path"], data_path=config["data_path"])
+            return TASKS_MAPPING[config['method']](**config)
 
     def process_flow(self):
         for step in self.flow_order:

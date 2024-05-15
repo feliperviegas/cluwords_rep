@@ -9,7 +9,16 @@ from clustering_task.clustering_task import ClusteringTask
 
 
 class HnswTask(ClusteringTask):
-    def __init__(self, n_threads: int, num_neighbors: int):
+    def __init__(self, **config_kwargs):
+        """
+        Params:
+          config_kwargs: Config variable may contain the following information:
+            n_threads: Number of threads to use in the HNSW method (deafult 1).
+            num_neighbors: Number of neighbors (default 10).
+        Returns:
+        """
+        n_threads = config_kwargs['n_threads'] if 'n_threads' in config_kwargs else 1
+        num_neighbors = config_kwargs['num_neighbors'] if 'num_neighbors' in config_kwargs else 10
         super().__init__(num_neighbors=num_neighbors)  
         self.n_threads = n_threads
         

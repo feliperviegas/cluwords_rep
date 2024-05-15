@@ -7,7 +7,18 @@ from task.task import Task
 
 
 class WriterTask(Task):
-    def __init__(self, cluwords_repr_path: str, data_path: str) -> None:
+    def __init__(self, **config_kwargs) -> None:
+        """
+        Params:
+          config_kwargs: Config variable may contain the following information:
+            cluwords_repr_path: filepath to save the .npz cluwords representation.
+            data_path: filepath to save the parquet data.
+        Returns:
+        """
+        cluwords_repr_path = config_kwargs['cluwords_repr_path'] if 'cluwords_repr_path' in config_kwargs else '.'
+        data_path = config_kwargs['data_path'] if 'data_path' in config_kwargs else '.'
+        
+        
         super().__init__()
         self.cluwords_repr_path = cluwords_repr_path
         self.data_path = data_path

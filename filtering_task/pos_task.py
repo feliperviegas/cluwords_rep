@@ -5,7 +5,16 @@ from filtering_task.filtering_task import FilteringTask
 
 
 class PartOfSpeechTask(FilteringTask):
-    def __init__(self, pos_filters: list[str]):
+    def __init__(self, **config_kwargs):
+        """
+        Params:
+          config_kwargs: Config variable may contain the following information:
+            pos_filters: list of strings that contains the tags of spacy PoS.
+            
+        Returns:
+        """
+        pos_filters = config_kwargs['pos_filters'] if 'pos_filters' in config_kwargs else [] 
+        
         super().__init__()
         self._nlp = spacy.load("en_core_web_sm")
         self._nlp.add_pipe("emoji", first=True)

@@ -6,7 +6,19 @@ from embedding_task.embedding_task import EmbeddingTask
 
 
 class GensimEmbeddingTask(EmbeddingTask):
-    def __init__(self, emb_file_source: str, binary: bool, vocabulary_file_source: str = None):
+    def __init__(self, **config_kwargs):
+        """
+        Params:
+          config_kwargs: Config variable may contain the following information:
+            emb_file_source: filepath of the embedding file.
+            binary: bool to check whether the embedding file is binary or not.
+            vocabulary_file_source: filepath that contains the vocabulary.
+        Returns:
+        """
+        emb_file_source = config_kwargs['data_source']
+        binary = config_kwargs['binary']
+        vocabulary_file_source = config_kwargs['vocabulary'] if 'vocabulary' in config_kwargs else None
+        
         super().__init__(vocabulary_file_source=vocabulary_file_source)
         self.model = self.read_embedding(emb_file_source, binary)
     
