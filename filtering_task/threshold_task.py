@@ -6,7 +6,15 @@ from utils.incremental_coo_matrix import IncrementalCOOMatrix
 
 
 class ThresholdTask(FilteringTask):
-    def __init__(self, threshold_value: float):
+    def __init__(self, **config_kwargs):
+        """
+        Params:
+          config_kwargs: Config variable may contain the following information:
+            pos_filters: list of strings that contains the tags of spacy PoS.
+            
+        Returns:
+        """
+        threshold_value = config_kwargs['threshold_value'] if 'threshold_value' in config_kwargs else 0.4
         super().__init__()
 
         self.threshold_value = threshold_value
